@@ -61,7 +61,7 @@ input[type="text"] {
     }
     
     footer {
-        margin-top: 55rem;
+        margin-top: 55rem !important;
     }
 }
 
