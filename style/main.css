@@ -40,7 +40,7 @@ input[type="text"] {
 
 @media only screen and (max-width: 60em) {
     input[type="text"] {
-        width: 50%;
+        width: 75%;
     }
 
     .time {
@@ -58,6 +58,10 @@ input[type="text"] {
     }
     .static {
         height: 70vh;
+    }
+    
+    footer {
+        margin-top: 55rem;
     }
 }
 
