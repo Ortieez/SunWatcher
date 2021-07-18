@@ -46,6 +46,19 @@ input[type="text"] {
     .time {
         display: none ;
     }
+
+    .sunset {
+        height: 70vh;
+    }
+    .sunrise {
+        height: 70vh;
+    }
+    .movingBg {
+        height: 70vh;
+    }
+    .static {
+        height: 70vh;
+    }
 }
 
 @media only screen and (min-width: 55em) {
