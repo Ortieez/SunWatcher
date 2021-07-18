@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap');
+:root {
+    --bg-color: #fcfcfc;
+    --txt-color: #0a0a0a;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-color: #1a1a1a;
+        --txt-color: #fcfcfc;
+    }
+}
+
+html, body{
+    margin: 0; 
+
+    background-color: var(--bg-color);
+    color: var(--txt-color);
+    font-family: 'Noto Sans', sans-serif;
+}
+
+.search {
+    margin-left: 2rem;
+    margin-top: 2.5rem;
+}
+
+input[type="text"] {
+    padding: 10px;
+    width: 30%;
+    height: 40px;
+    border-radius: 15px;
+
+    border: none;
+
+    color: #c2c2c2;
+    font-size: 20px;
+    background-color: rgb(73, 73, 73);
+    box-shadow: 4px 5px 10px 0px #111111;
+}
+
+@media only screen and (max-width: 60em) {
+    input[type="text"] {
+        width: 50%;
+    }
+
+    .time {
+        display: none ;
+    }
+}
+
+@media only screen and (min-width: 55em) {
+    .time {
+        display: block;
+    }
+}
+
+.movingBg {
+    position: absolute;
+    z-index: 1;
+    margin-top: 6rem;
+    height: 75vh;
+
+    background-color: rgb(54, 54, 54);
+}
+
+.static {
+    position: absolute;
+    z-index: 0;
+    margin-top: 6rem;
+    height: 75vh;
+    width: 100%;
+    background-color: rgb(31, 31, 31);
+}
+
+.sunrise {
+    opacity: 0;
+    position: absolute;
+    z-index: 2;
+    margin-top: 6rem;
+    height: 75vh;
+    width: 3px;
+
+    background-color: rgb(240, 206, 17);
+}
+
+.sunset {
+    opacity: 0;
+    position: absolute;
+    z-index: 2;
+    margin-top: 6rem;
+    height: 75vh;
+    width: 3px;
+
+    background-color: rgb(17, 143, 240);
+}
+
+.time {
+    opacity: 0;
+    font-size: 5rem;
+    position: absolute; 
+    top:33%; 
+    left:44.7%;
+    z-index: 3;
+}
+
+.bottomText {
+    margin-top: 75vh;
+    color: rgb(240, 206, 17);
+}
+
+.bottomText2 {
+    margin-top: 75vh;
+    color: rgb(17, 143, 240);
+}
+
+footer {
+    margin-top: 49rem;
+    text-align: center;
+    color: rgb(160, 160, 160);
+}
+
+footer a {
+    color: rgb(255, 248, 34);
+    text-decoration: none;
+}

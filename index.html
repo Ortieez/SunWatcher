@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="style/main.css">
+    <link rel="shortcut icon" href="images/SunWatchFavicon.svg" type="image/x-icon">
+
+    <title>Sun Watcher</title>
+</head>
+
+
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<body onload="update()">
+    <h3 class="time" id="currentTime"></h3>
+    
+    <div class="sunrise" id="r">
+        <h4 class="bottomText" id="rTxt"></h4>
+    </div>
+    <div class="sunset" id="s">
+        <h4 class="bottomText2" id="sTxt"></h4>
+    </div>
+    <div class="movingBg" id="bg"></div>
+    <div class="static"></div>
+    <div class="search">
+        <input type="text" id="input_field" placeholder="Enter your city and press enter">
+    </div>
+
+    <footer>
+        Made possible with <a href="sunrise-sunset.org"><strong>sunrise-sunset.org</strong></a>
+        <br>
+        Made by <a href="https://www.ortieez.com" style="color: rgb(34, 78, 255);"><strong>ortieez</strong></a>
+    </footer>
+    <script>
+        document.getElementById("input_field").addEventListener("keyup", function(event) {
+            if (event.keyCode === 13) {
+                search();
+            }
+        });
+ 
+        function update() {
+            let today = new Date();
+              
+            let hours = today.getHours();
+            let minutes = today.getMinutes();
+            let time;
+            if (minutes < 10){
+                let new_minutes = "0" + minutes;
+                time = hours + ":" + new_minutes;
+                document.getElementById("currentTime").innerText = time;
+            } else {
+                time = hours + ":" + minutes;
+                document.getElementById("currentTime").innerText = time;
+            }
+            
+            hours *= 60;
+            hours = hours + minutes;
+            hours = hours / 1440;
+            hours *= 100;
+        
+            $(".movingBg").animate({width: hours + "%"},1000)
+            $(".time").animate({opacity: "60%"}, 1500)
+        }
+        
+        function search() {
+            let input_val = document.getElementById("input_field").value;
+            
+            fetch("https://api.openweathermap.org/geo/1.0/direct?q=" + input_val + "&appid=44326f59a2453abb88d44c64b343c888")
+            
+            .then((response) => response.json())
+            .then(data => {
+                let lat = data[0].lat;
+                let lon = data[0].lon;
+
+                fetch(`https://api.sunrise-sunset.org/json?lat=${data[0].lat}&lng=${data[0].lon}&date=today&formatted=0`)
+                .then((response) => response.json())
+                .then(data => {
+                    var sunrise = data.results.sunrise.match(/(\d+:\d+)+/)[0].split(":");
+                    var sunset = data.results.sunset.match(/(\d+:\d+)+/)[0].split(":");
+
+                    let riseHour = sunrise[0];
+                    let riseMin = sunrise[1];
+
+                    let setHour = sunset[0];
+                    let setMin = sunset[1];
+
+                    document.getElementById("rTxt").innerText = riseHour + ":" + riseMin + "\n" + "Sunrise";
+                    document.getElementById("sTxt").innerText = setHour + ":" + setMin + "\n" + "Sunset";
+
+                    riseHour = riseHour * 60;
+                    riseHour = riseHour + riseMin;
+                    riseHour = riseHour / 1440;
+
+                    setHour = setHour * 60;
+                    setHour = setHour + setMin;
+                    setHour = setHour / 1440;
+
+                    $(".sunrise").animate({opacity:1},250).animate({"margin-left": riseHour + "%"},1250)
+                    $(".sunset").animate({opacity:1},250).animate({"margin-left": setHour + "%"},1200)
+
+                    
+                })
+            })
+            .catch(err => alert("City you entered is not found or does not exist."))       
+        }
+       
+        //https://sunrise-sunset.org/api
+        </script>
+</body>
+</html>
