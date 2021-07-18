@@ -1,15 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap');
 :root {
-    --bg-color: #fcfcfc;
-    --txt-color: #0a0a0a;
+    --bg-color: #1a1a1a;
+    --txt-color: #fcfcfc;
 }
 
-@media (prefers-color-scheme: dark) {
-    :root {
-        --bg-color: #1a1a1a;
-        --txt-color: #fcfcfc;
-    }
-}
 
 html, body{
     margin: 0; 
